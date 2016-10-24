@@ -1,0 +1,88 @@
+[Eagle]
+Version="05 06 00"
+Platform="Windows"
+Serial="392F6FAF50-LSR-DOWL-NCP"
+Globals="Globals"
+Desktop="Desktop"
+
+[Globals]
+AutoSaveProject=1
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/analog-devices.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/atmel.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/con-phoenix-350.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/con-phoenix-508.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/crystal.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/led (2).lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/led-7-segment.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/led-matrix.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/maxim.lbr"
+UsedLibrary="C:/Program Files (x86)/EAGLE-5.6.0/lbr/sipex.lbr"
+UsedLibrary="H:/Hardware/Eagle/Projects/HallCurrentSensor/HMC10xx.lbr"
+UsedLibrary="H:/Hardware/Eagle/Projects/HallCurrentSensor/IRF7307.lbr"
+UsedLibrary="H:/Hardware/Eagle/Projects/HallCurrentSensor/attiny24a.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/rcl.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/supply1.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/linear.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/diode.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/con-subd.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/transistor.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/led.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/analog-devices2.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/pinhead.lbr"
+UsedLibrary="H:/Hardware/Eagle/Projects/HallCurrentSensor/reper.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/padsim.lbr"
+UsedLibrary="H:/Hardware/Eagle/lbr/testpad.lbr"
+UsedLibrary="SMA420.lbr"
+UsedLibrary="FJ5101BH.lbr"
+UsedLibrary="MAX232.lbr"
+UsedLibrary="Pinhead1x8round.lbr"
+
+[Win_1]
+Type="Board Editor"
+Loc="162 168 761 567"
+State=0
+Number=2
+File="MegaAndLed.brd"
+View="-26798 -64747 567982 679659"
+WireWidths=" 0 2540 3048 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 4064"
+PadDiameters=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 0"
+PadDrills=" 5000 6000 7000 9000 10000 11000 12000 13000 14000 15000 16000 20000 22000 28000 32000 8000"
+ViaDiameters=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 0"
+ViaDrills=" 5000 7000 8000 9000 10000 11000 12000 13000 14000 15000 16000 20000 22000 28000 32000 6000"
+HoleDrills=" 5000 7000 8000 9000 10000 11000 12000 13000 14000 15000 16000 20000 22000 28000 32000 6000"
+TextSizes=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 19304 21844 25400 38100 50800 64516 17780"
+PolygonSpacings=" 2540 3048 4064 6096 8128 10160 14224 16764 17780 19304 21844 25400 38100 50800 64516 12700"
+PolygonIsolates=" 2540 3048 4064 6096 8128 10160 12700 14224 16764 17780 19304 21844 25400 38100 64516 0"
+MiterRadiuss=" 2540 3175 6350 12700 25400 10000 20000 25000 50000 75000 100000 0"
+SmdSizes=" 3048 1524 4064 2032 6096 3048 8128 4064 10160 5080 12700 6604 14224 7112 16764 8128 17780 9144 19304 9652 21844 10668 25400 12700 38100 19304 50800 25400 64516 32512 12700 6350"
+WireBend=0
+WireBendSet=0
+WireCap=1
+MiterStyle=0
+PadShape=0
+ViaShape=0
+PolygonPour=0
+PolygonRank=1
+PolygonThermals=1
+PolygonOrphans=0
+TextRatio=8
+PinDirection=3
+PinFunction=0
+PinLength=2
+PinVisible=3
+SwapLevel=0
+ArcDirection=0
+AddLevel=2
+PadsSameType=0
+Layer=16
+
+[Win_2]
+Type="Control Panel"
+Loc="101 162 945 1004"
+State=2
+Number=0
+
+[Desktop]
+Screen="1920 2160"
+Window="Win_1"
+Window="Win_2"
