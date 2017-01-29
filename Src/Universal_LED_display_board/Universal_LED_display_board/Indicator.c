@@ -137,6 +137,7 @@ static unsigned char CharTo7Seg(unsigned char c, unsigned char NextValue)
 	return mask;
 }
 
+/*
 static void Segments(char Value, char NextValue)
 {
 	// Convert Value to segments on/off	
@@ -155,15 +156,29 @@ static void Segments(char Value, char NextValue)
 	if(c & 0x40) PORTD |= (1<<PD6); else PORTD &= ~(1<<PD6);
 	if(c & 0x80) PORTD |= (1<<PD7); else PORTD &= ~(1<<PD7);
 #endif
-}
+}*/
 
 // Turns on segments of Digit defined by Value. 
 // NextValue is used to show decimal point in place, together with character.
 static void ShowDigit(unsigned char Digit, char Value, char bShowPoint)
-{
+{	
+//	Segments(Value, bShowPoint);
+	// Convert Value to segments on/off
+	unsigned char c = CharTo7Seg(Value, bShowPoint);
+#if COMMON_PIN == COMMON_ANODE
+	c = ~c; // Invert output
+#endif
+
+#if NUM_DIGITS == 4
 	DIGITS_OFF;
-	
-	Segments(Value, bShowPoint);
+	if(c & 0x01) PORTC |= (1<<PC0); else PORTC &= ~(1<<PC0);
+	if(c & 0x02) PORTC |= (1<<PC1); else PORTC &= ~(1<<PC1);
+	if(c & 0x04) PORTC |= (1<<PC2); else PORTC &= ~(1<<PC2);
+	if(c & 0x08) PORTC |= (1<<PC3); else PORTC &= ~(1<<PC3);
+	if(c & 0x10) PORTD |= (1<<PD4); else PORTD &= ~(1<<PD4);
+	if(c & 0x20) PORTD |= (1<<PD5); else PORTD &= ~(1<<PD5);
+	if(c & 0x40) PORTD |= (1<<PD6); else PORTD &= ~(1<<PD6);
+	if(c & 0x80) PORTD |= (1<<PD7); else PORTD &= ~(1<<PD7);
 	
 	switch(Digit)
 	{
@@ -172,6 +187,37 @@ static void ShowDigit(unsigned char Digit, char Value, char bShowPoint)
 		case 2: DIGIT_3_ON; return;
 		case 3: DIGIT_4_ON; return;
 	}	
+#endif
+
+#if NUM_DIGITS == 2
+	if(Digit == 1)
+	{
+		if(c & 0x01) PORTC |= (1<<PC0); else PORTC &= ~(1<<PC0);
+		if(c & 0x02) PORTC |= (1<<PC1); else PORTC &= ~(1<<PC1);
+		if(c & 0x04) PORTC |= (1<<PC2); else PORTC &= ~(1<<PC2);
+		if(c & 0x08) PORTC |= (1<<PC3); else PORTC &= ~(1<<PC3);
+		if(c & 0x10) PORTD |= (1<<PD4); else PORTD &= ~(1<<PD4);
+		if(c & 0x20) PORTD |= (1<<PD5); else PORTD &= ~(1<<PD5);
+		if(c & 0x40) PORTD |= (1<<PD6); else PORTD &= ~(1<<PD6);
+		if(c & 0x80) PORTD |= (1<<PD7); else PORTD &= ~(1<<PD7);
+	}
+	else if(Digit == 0)
+	{
+		if(c & 0x01) PORTB |= (1<<PB0); else PORTB &= ~(1<<PB0);
+		if(c & 0x02) PORTB |= (1<<PB1); else PORTB &= ~(1<<PB1);
+		if(c & 0x04) PORTB |= (1<<PB2); else PORTB &= ~(1<<PB2);
+		if(c & 0x08) PORTB |= (1<<PB3); else PORTB &= ~(1<<PB3);
+		if(c & 0x10) PORTB |= (1<<PB4); else PORTB &= ~(1<<PB4);
+		if(c & 0x20) PORTB |= (1<<PB5); else PORTB &= ~(1<<PB5);
+#if USES_CRYSTAL == 0
+		if(c & 0x40) PORTB |= (1<<PB6); else PORTB &= ~(1<<PB6);
+		if(c & 0x80) PORTB |= (1<<PB7); else PORTB &= ~(1<<PB7);
+#else
+		if(c & 0x40) PORTC |= (1<<PC4); else PORTC &= ~(1<<PC4);
+		if(c & 0x80) PORTC |= (1<<PC5); else PORTC &= ~(1<<PC5);
+#endif		
+	}
+#endif
 }
 
 static unsigned short int Time = 0; // Time for moving a string being displayed 
@@ -326,4 +372,14 @@ void InitIndicator()
 	DDRC = (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
 	DDRD = (1<<DDD4) | (1<<DDD5) | (1<<DDD6) | (1<<DDD7);
 #endif
+#if NUM_DIGITS == 2 // 2 * 1-digit display FJ5101BH
+	DDRB = (1<<DDB0) | (1<<DDB1) | (1<<DDB2) | (1<<DDB3) | (1<<DDB4) | (1<<DDB5);
+	DDRC = (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
+	DDRD = (1<<DDD4) | (1<<DDD5) | (1<<DDD6) | (1<<DDD7);
+#if USES_CRYSTAL == 1
+	DDRC |= (1<<DDC4) | (1<<DDC5);
+#else
+	DDRB |= (1<<DDB6) | (1<<DDB7);
+#endif
+#endif //NUM_DIGITS == 2
 }

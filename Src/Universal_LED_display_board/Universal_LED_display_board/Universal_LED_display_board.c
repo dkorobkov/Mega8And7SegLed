@@ -25,7 +25,7 @@ int main(void)
 	
 	StringToIndicator_P(String);
 	
-	unsigned short int count = 0;
+	unsigned short int count = 0;	
 	
     while(1)
     {
