@@ -26,6 +26,9 @@
  | 11  |  a    |  PC0   23 |     1      |
  | 12  |  C1   |  PB3   15 |     1      |
  +-----+-------+-----------+------------+
+ 
+ This code was tested with NUM_DIGITS=4 and COMMON_PIN=COMMON_CATHODE
+ 
  */ 
 
 
@@ -37,11 +40,21 @@
 // User settable defines.
 
 // Set type of your indicator.
-#define COMMON_PIN COMMON_CATHODE
+#define COMMON_PIN COMMON_ANODE
 
 // Set number of digits on your indicator. Can be 2 or 4
 // 4 is for SMA420564 and similar.
+// 2 is for 2*FJ5101BH and similar.
 #define NUM_DIGITS 4
+
+// If 1-digit LEDs are installed there are two options. 
+// If you need crystal (i.e. Atmel's internal calibrated RC oscillator
+// is not sufficient) you will short R30 and R31 "w/xtal". If you need SDA and SCL
+// you will have to work __without__ crystal and short R17, R18 "no xtal".
+#if NUM_DIGITS == 2
+	#define USES_CRYSTAL 0 // LED connected to PB6, PB7
+//	#define USES_CRYSTAL 1 // LED connected to PC4, PC5
+#endif
 
 // Set maximum string length for display. Affects free RAM.
 // (Of course, for some applications you will want to use PROGMEM
