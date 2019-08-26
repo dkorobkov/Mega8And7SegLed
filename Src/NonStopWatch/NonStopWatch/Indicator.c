@@ -41,6 +41,19 @@
 	#define DIGITS_OFF  (PORTB &= ~( (1<<PB0) | (1<<PB1) | (1<<PB2) | (1<<PB3)))
 #endif
 
+#if COMMON_PIN == COMMON_ANODE
+#define DIGIT_1_OFF  (PORTB |=  (1<<PB3))
+#define DIGIT_1_ON (PORTB &= ~(1<<PB3))
+#define DIGIT_2_OFF  (PORTB |=  (1<<PB2))
+#define DIGIT_2_ON (PORTB &= ~(1<<PB2))
+#define DIGIT_3_OFF  (PORTB |=  (1<<PB1))
+#define DIGIT_3_ON (PORTB &= ~(1<<PB1))
+#define DIGIT_4_OFF  (PORTB |=  (1<<PB0))
+#define DIGIT_4_ON (PORTB &= ~(1<<PB0))
+#define DIGITS_OFF  (PORTB |= ( (1<<PB0) | (1<<PB1) | (1<<PB2) | (1<<PB3)))
+#endif
+
+
 /*
 	__________________________________________________
 	     |   segment values              |            |
@@ -155,6 +168,17 @@ static void Segments(char Value, char NextValue)
 	if(c & 0x40) PORTD |= (1<<PD6); else PORTD &= ~(1<<PD6);
 	if(c & 0x80) PORTD |= (1<<PD7); else PORTD &= ~(1<<PD7);
 #endif
+#if NUM_DIGITS == 2
+	if(c & 0x01) PORTC |= (1<<PC0); else PORTC &= ~(1<<PC0);
+	if(c & 0x02) PORTC |= (1<<PC1); else PORTC &= ~(1<<PC1);
+	if(c & 0x04) PORTC |= (1<<PC2); else PORTC &= ~(1<<PC2);
+	if(c & 0x08) PORTC |= (1<<PC3); else PORTC &= ~(1<<PC3);
+	if(c & 0x10) PORTD |= (1<<PD4); else PORTD &= ~(1<<PD4);
+	if(c & 0x20) PORTD |= (1<<PD5); else PORTD &= ~(1<<PD5);
+	if(c & 0x40) PORTD |= (1<<PD6); else PORTD &= ~(1<<PD6);
+	if(c & 0x80) PORTD |= (1<<PD7); else PORTD &= ~(1<<PD7);
+#endif
+
 }
 
 // Turns on segments of Digit defined by Value. 
@@ -325,5 +349,16 @@ void InitIndicator()
 	DDRB = (1<<DDB0) | (1<<DDB1) | (1<<DDB2) | (1<<DDB3);
 	DDRC = (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
 	DDRD = (1<<DDD4) | (1<<DDD5) | (1<<DDD6) | (1<<DDD7);
+#endif
+#if NUM_DIGITS == 2 // 2 * 1-digit display FJ5101BH
+DDRB = (1<<DDB0) | (1<<DDB1) | (1<<DDB2) | (1<<DDB3) | (1<<DDB4) | (1<<DDB5);
+DDRC = (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
+DDRD = (1<<DDD4) | (1<<DDD5) | (1<<DDD6) | (1<<DDD7);
+#if USES_CRYSTAL == 1
+	DDRC |= (1<<DDC4) | (1<<DDC5);
+#else
+	DDRB |= (1<<DDB6) | (1<<DDB7);
+#endif
+
 #endif
 }
