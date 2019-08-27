@@ -6,6 +6,7 @@
  */ 
 
 #define F_CPU 8000000
+#define ATMEGA8
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -46,10 +47,13 @@ ISR(TIMER0_OVF_vect)
 int main(void)
 {
 	// Setup timer
-
+#ifdef ATMEGA8
 	TCCR0 =  (1<<CS01) | (1<<CS00) ;// 011: CK/64, 8 MHz -> 125 kHz
-
 	TIMSK |= 1<<TOIE0;
+#else
+	TCCR0B =  (1<<CS01) | (1<<CS00) ;// 011: CK/64, 8 MHz -> 125 kHz
+	TIMSK0 |= 1<<TOIE0;
+#endif
 
 	InitIndicator();
 	enable();
